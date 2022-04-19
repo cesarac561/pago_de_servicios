@@ -1,0 +1,165 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pagoservicios-configserver
+  labels:
+    app: configserver  
+spec:
+  selector:
+    matchLabels:
+      app: configserver
+  template:
+    metadata:
+      labels:
+        app: configserver
+    spec:
+      containers:
+      - name: bootcamp-pagoservicios-configserver
+        image: cesarac561/bootcamp-pagoservicios-configserver:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-pagoservicios-configserver
+  labels:
+    app: configserver
+spec:
+  type: NodePort  
+  selector:
+    app: configserver
+  ports:
+  - protocol: TCP
+    port: 8888
+    targetPort: 8888
+    nodePort: 30007
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pagoservicios-eurekaserver
+  labels:
+    app: eurekaserver  
+spec:
+  selector:
+    matchLabels:
+      app: eurekaserver
+  template:
+    metadata:
+      labels:
+        app: eurekaserver
+    spec:
+      containers:
+      - name: bootcamp-pagoservicios-eurekaserver
+        image: cesarac561/bootcamp-pagoservicios-eurekaserver:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-pagoservicios-eurekaserver
+  labels:
+    app: eurekaserver
+spec:
+  type: NodePort
+  selector:
+    app: eurekaserver
+  ports:
+  - protocol: TCP
+    port: 8761
+    targetPort: 8761
+    nodePort: 30008
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pagoservicios-scgateway
+  labels:
+    app: scgateway  
+spec:
+  selector:
+    matchLabels:
+      app: scgateway
+  template:
+    metadata:
+      labels:
+        app: scgateway
+    spec:
+      containers:
+      - name: bootcamp-pagoservicios-scgateway
+        image: cesarac561/bootcamp-pagoservicios-scgateway:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-pagoservicios-scgateway
+  labels:
+    app: scgateway
+spec:
+  type: NodePort
+  selector:
+    app: scgateway
+  ports:
+  - protocol: TCP
+    port: 9090
+    targetPort: 8080
+    nodePort: 30009
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pago-dev
+  labels:
+    app: pago  
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pago
+  template:
+    metadata:
+      labels:
+        app: pago
+    spec:
+      containers:
+      - name: bootcamp-pago-dev
+        image: cesarac561/bootcamp-pago:0.0.1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-favorito-dev
+  labels:
+    app: favorito  
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: favorito
+  template:
+    metadata:
+      labels:
+        app: favorito
+    spec:
+      containers:
+      - name: bootcamp-favorito-dev
+        image: cesarac561/bootcamp-favorito:0.0.1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-pagfav-ux-dev
+  labels:
+    app: pagfav_ux  
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pagfav_ux
+  template:
+    metadata:
+      labels:
+        app: pagfav_ux
+    spec:
+      containers:
+      - name: bootcamp-pagfav-ux-dev
+        image: cesarac561/bootcamp-pagfav_ux:0.0.1
+        
