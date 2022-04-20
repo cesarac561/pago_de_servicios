@@ -73,7 +73,7 @@ kind: Deployment
 metadata:
   name: deployment-pagoservicios-scgateway
   labels:
-    app: scgateway  
+    app: scgateway
 spec:
   selector:
     matchLabels:
@@ -108,7 +108,7 @@ kind: Deployment
 metadata:
   name: deployment-pago-dev
   labels:
-    app: pago  
+    app: pago
 spec:
   replicas: 2
   selector:
@@ -128,7 +128,7 @@ kind: Deployment
 metadata:
   name: deployment-favorito-dev
   labels:
-    app: favorito  
+    app: favorito
 spec:
   replicas: 2
   selector:
@@ -148,7 +148,7 @@ kind: Deployment
 metadata:
   name: deployment-pagfav-ux-dev
   labels:
-    app: pagfav_ux  
+    app: pagfav_ux
 spec:
   replicas: 2
   selector:
